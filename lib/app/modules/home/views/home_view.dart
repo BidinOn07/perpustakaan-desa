@@ -60,7 +60,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ],
                   onSelected: (value) {
-                    controller.sortOption.value = value;
+                    controller.sortOption.value = value.toString();
                     controller.sortBooks();
                   },
                 ),

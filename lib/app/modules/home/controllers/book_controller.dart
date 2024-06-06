@@ -22,46 +22,30 @@ class BookController {
 }
 
 class BookList extends StatelessWidget {
-  final HomeController homeC = Get.put(HomeController());
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Book>>(
-      future: homeC.fetchBooks(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          print('Error loading books: ${snapshot.error}');
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          print('No data available');
-          return Center(child: Text('No data available'));
-        } else {
-          return Obx(() {
-            if (homeC.filteredBooks.isEmpty) {
-              print('No filtered data available');
-              return Center(child: Text('No data available'));
-            } else {
-              return ListView.builder(
-                itemCount: homeC.filteredBooks.length,
-                itemBuilder: (context, index) {
-                  final book = homeC.filteredBooks[index];
-                  return Card(
-                    elevation: 2,
-                    margin: EdgeInsets.all(8),
-                    child: ListTile(
-                      title: Text(book.title),
-                      subtitle: Text('Penulis: ${book.author}'),
-                      trailing: Text('Dibaca: ${book.readCount}'),
-                    ),
-                  );
-                },
-              );
-            }
-          });
-        }
-      },
-    );
+    final HomeController homeC = Get.find<HomeController>();
+
+    return Obx(() {
+      if (homeC.filteredBooks.isEmpty) {
+        return Center(child: Text('No data available'));
+      } else {
+        return ListView.builder(
+          itemCount: homeC.filteredBooks.length,
+          itemBuilder: (context, index) {
+            final book = homeC.filteredBooks[index];
+            return Card(
+              elevation: 2,
+              margin: EdgeInsets.all(8),
+              child: ListTile(
+                title: Text(book.title),
+                subtitle: Text('Penulis: ${book.author}'),
+                trailing: Text('Dibaca: ${book.readCount}'),
+              ),
+            );
+          },
+        );
+      }
+    });
   }
 }

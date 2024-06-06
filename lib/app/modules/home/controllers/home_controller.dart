@@ -23,14 +23,13 @@ class HomeController extends GetxController {
     });
   }
 
-  Future<List<Book>> fetchBooks() async {
+  Future<void> fetchBooks() async {
     final response = await http.get(Uri.parse('${Config().url}/books'));
     if (response.statusCode == 200) {
       final List<dynamic> responseData = jsonDecode(response.body);
       books.assignAll(responseData.map((json) => Book.fromJson(json)).toList());
       filteredBooks.value = books.value;
       sortBooks();
-      return books;
     } else {
       print('Failed to load books: ${response.statusCode}');
       print('Response body: ${response.body}');
@@ -52,10 +51,9 @@ class HomeController extends GetxController {
 
   void sortBooks() {
     if (sortOption.value == 'Sering Dibaca') {
-      books.sort((a, b) => b.readCount.compareTo(a.readCount));
+      filteredBooks.sort((a, b) => b.readCount.compareTo(a.readCount));
     } else if (sortOption.value == 'Jarang Dibaca') {
-      books.sort((a, b) => a.readCount.compareTo(b.readCount));
+      filteredBooks.sort((a, b) => a.readCount.compareTo(b.readCount));
     }
-    //
   }
 }
