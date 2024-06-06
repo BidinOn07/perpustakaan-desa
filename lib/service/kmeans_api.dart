@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   // Ganti 192.168.1.2 dengan IP address mesin host
-  final String baseUrl = 'http://192.168.1.115:8000';
+  final String baseUrl = 'http://10.0.2.2:8000';
   //10.0.2.2:8000 emu
 
   Future<Map<String, dynamic>> fetchKMeans(
