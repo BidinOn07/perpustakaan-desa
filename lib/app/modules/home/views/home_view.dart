@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../utils/theme.dart';
+import '../controllers/book_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -29,8 +30,23 @@ class HomeView extends GetView<HomeController> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                Expanded(
+                  child: TextField(
+                    controller: controller.searchController,
+                    decoration: InputDecoration(
+                      hintText: 'Cari',
+                      prefixIcon: Icon(Icons.search, color: kColorPrimary),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 8.0),
                 PopupMenuButton(
                   icon: Icon(Icons.filter_alt, size: 30, color: kColorPrimary),
                   itemBuilder: (context) => [
@@ -45,30 +61,14 @@ class HomeView extends GetView<HomeController> {
                   ],
                   onSelected: (value) {
                     controller.sortOption.value = value;
-                    controller.sortBooks(); // Pastikan fungsi ini dipanggil
+                    controller.sortBooks();
                   },
                 ),
               ],
             ),
           ),
           Expanded(
-            child: Obx(() {
-              return ListView.builder(
-                itemCount: controller.books.length,
-                itemBuilder: (context, index) {
-                  final book = controller.books[index];
-                  return Card(
-                    elevation: 2,
-                    margin: EdgeInsets.all(8),
-                    child: ListTile(
-                      title: Text(book.title),
-                      subtitle: Text('Author: ${book.author}'),
-                      trailing: Text('Read Count: ${book.readCount}'),
-                    ),
-                  );
-                },
-              );
-            }),
+            child: BookList(),
           ),
         ],
       ),
