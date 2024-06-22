@@ -14,10 +14,10 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _pageIndex = 0;
-  List<Widget> _pages = [
-    HomeView(),
-    ClusteringView(),
-    GrafikView(),
+  final List<Widget> _pages = [
+    const HomeView(),
+    const ClusteringView(),
+    const GrafikView(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
         color: kColorPrimary,
         buttonBackgroundColor: kColorPrimary,
         height: 70,
-        items: <Widget>[
+        items: const <Widget>[
           Icon(
             Icons.home,
             size: 30,

@@ -11,7 +11,7 @@ class GrafikView extends GetView<GrafikController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Grafik',
           style: TextStyle(
             fontSize: 23,

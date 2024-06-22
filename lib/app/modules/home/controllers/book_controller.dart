@@ -22,13 +22,15 @@ class BookController {
 }
 
 class BookList extends StatelessWidget {
+  const BookList({super.key});
+
   @override
   Widget build(BuildContext context) {
     final HomeController homeC = Get.find<HomeController>();
 
     return Obx(() {
       if (homeC.filteredBooks.isEmpty) {
-        return Center(child: Text('No data available'));
+        return const Center(child: Text('No data available'));
       } else {
         return ListView.builder(
           itemCount: homeC.filteredBooks.length,
@@ -36,7 +38,7 @@ class BookList extends StatelessWidget {
             final book = homeC.filteredBooks[index];
             return Card(
               elevation: 2,
-              margin: EdgeInsets.all(8),
+              margin: const EdgeInsets.all(8),
               child: ListTile(
                 title: Text(book.title),
                 subtitle: Text('Penulis: ${book.author}'),

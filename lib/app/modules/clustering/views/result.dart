@@ -11,7 +11,7 @@ class ClusterResultsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hasil Clustering'),
+        title: const Text('Hasil Clustering'),
       ),
       body: ListView.builder(
         itemCount: clusters.length,
@@ -20,9 +20,9 @@ class ClusterResultsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Cluster ${index + 1}',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               DataTable(
-                columns: [
+                columns: const [
                   DataColumn(label: Text('Judul')),
                   DataColumn(label: Text('Penulis')),
                   DataColumn(label: Text('Dibaca')),
@@ -35,7 +35,7 @@ class ClusterResultsPage extends StatelessWidget {
                   ]);
                 }).toList(),
               ),
-              SizedBox(height: 20), // Spasi antar cluster
+              const SizedBox(height: 20), // Spasi antar cluster
             ],
           );
         },

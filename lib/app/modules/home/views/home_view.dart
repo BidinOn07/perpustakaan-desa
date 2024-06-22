@@ -12,7 +12,7 @@ class HomeView extends GetView<HomeController> {
     final controller = Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Home',
           style: TextStyle(
             fontSize: 23,
@@ -36,7 +36,7 @@ class HomeView extends GetView<HomeController> {
                     controller: controller.searchController,
                     decoration: InputDecoration(
                       hintText: 'Cari',
-                      prefixIcon: Icon(Icons.search, color: kColorPrimary),
+                      prefixIcon: const Icon(Icons.search, color: kColorPrimary),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide.none,
@@ -46,15 +46,15 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                 ),
-                SizedBox(width: 8.0),
+                const SizedBox(width: 8.0),
                 PopupMenuButton(
-                  icon: Icon(Icons.filter_alt, size: 30, color: kColorPrimary),
+                  icon: const Icon(Icons.filter_alt, size: 30, color: kColorPrimary),
                   itemBuilder: (context) => [
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 'Sering Dibaca',
                       child: Text('Sering Dibaca'),
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 'Jarang Dibaca',
                       child: Text('Jarang Dibaca'),
                     ),
@@ -67,7 +67,7 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             child: BookList(),
           ),
         ],

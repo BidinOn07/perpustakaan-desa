@@ -74,14 +74,14 @@ class ClusteringController extends GetxController {
       } else {
         Get.dialog(
           AlertDialog(
-            title: Text('Clustering sudah optimal'),
-            content: Text('Tidak ada iterasi tambahan yang dibutuhkan.'),
+            title: const Text('Clustering sudah optimal'),
+            content: const Text('Tidak ada iterasi tambahan yang dibutuhkan.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   Get.back();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           ),

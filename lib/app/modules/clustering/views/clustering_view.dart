@@ -12,7 +12,7 @@ class ClusteringView extends GetView<ClusteringController> {
     Get.lazyPut(() => ClusteringController());
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Clustering KMeans',
           style: TextStyle(
             fontSize: 23,
@@ -31,67 +31,69 @@ class ClusteringView extends GetView<ClusteringController> {
           children: <Widget>[
             TextField(
               controller: controller.clustersController,
-              decoration: InputDecoration(labelText: 'Jumlah Cluster'),
+              decoration: const InputDecoration(labelText: 'Jumlah Cluster'),
               keyboardType: TextInputType.number,
             ),
             TextField(
               controller: controller.iterController,
-              decoration: InputDecoration(labelText: 'Jumlah Iterasi'),
+              decoration: const InputDecoration(labelText: 'Jumlah Iterasi'),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: controller.fetchKMeansData,
-              child: Text('Jalankan KMeans'),
+              child: const Text('Jalankan KMeans'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: controller.iterateKMeans,
-              child: Text('Iterasi Lagi'),
+              child: const Text('Iterasi Lagi'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Obx(() {
               if (controller.showResults.value) {
-                return Column(
-                  children: [
-                    Text(
-                      'Hasil Clustering:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                return Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Hasil Clustering:',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.labels.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text('Point ${index + 1}'),
+                              subtitle: Text(
+                                  'Cluster: ${controller.labels[index]}, Coordinates: ${controller.points[index]}'),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        const Text(
+                          'Cluster Centers:',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.centers.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text('Center ${index + 1}'),
+                              subtitle: Text(
+                                  'Coordinates: ${controller.centers[index]}'),
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: ListView.builder(
-                        itemCount: controller.labels.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text('Point ${index + 1}'),
-                            subtitle: Text(
-                                'Cluster: ${controller.labels[index]}, Coordinates: ${controller.points[index]}'),
-                          );
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'Cluster Centers:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: ListView.builder(
-                        itemCount: controller.centers.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text('Center ${index + 1}'),
-                            subtitle: Text(
-                                'Coordinates: ${controller.centers[index]}'),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 );
               } else {
                 return Container();

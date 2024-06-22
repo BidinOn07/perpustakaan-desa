@@ -16,8 +16,8 @@ class KMeansClustering {
 
   void _initializeCentroids() {
     Random random = Random();
-    centroids =
-        List.generate(k, (_) => books[random.nextInt(books.length)].readCount);
+    centroids = List.generate(
+        k, (_) => int.parse(books[random.nextInt(books.length)].readCount));
   }
 
   List<List<Book>> computeClusters() {
@@ -30,8 +30,9 @@ class KMeansClustering {
       List<List<Book>> newClusters = List.generate(k, (_) => []);
 
       for (var book in books) {
+        var bookReadCount = int.parse(book.readCount); // Konversi String ke int
         var distances =
-            centroids.map((c) => (c - book.readCount).abs()).toList();
+            centroids.map((c) => (c - bookReadCount).abs()).toList();
         var minDistanceIndex = distances.indexOf(distances.reduce(min));
         newClusters[minDistanceIndex].add(book);
       }
@@ -42,7 +43,9 @@ class KMeansClustering {
           throw Exception(
               'Salah satu cluster kosong, tidak bisa menghitung centroid');
         }
-        var average = cluster.map((b) => b.readCount).reduce((a, b) => a + b) ~/
+        var average = cluster
+                .map((b) => int.parse(b.readCount))
+                .reduce((a, b) => a + b) ~/
             cluster.length;
         newCentroids.add(average);
       }

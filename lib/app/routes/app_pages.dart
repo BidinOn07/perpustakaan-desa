@@ -18,7 +18,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.MAINPAGE,
-      page: () => MainPage(),
+      page: () => const MainPage(),
     ),
     GetPage(
       name: _Paths.HOME,
